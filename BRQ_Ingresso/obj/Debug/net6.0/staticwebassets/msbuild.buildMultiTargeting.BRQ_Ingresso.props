@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\BRQ_Ingresso.props" />
+</Project>
