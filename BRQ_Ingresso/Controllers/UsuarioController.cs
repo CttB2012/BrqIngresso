@@ -29,7 +29,7 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpGet("{id}", Name ="NovoUsuario")]
-    public ActionResult<Usuario> Get(string id) 
+    public ActionResult<Usuario> Get(Guid id) 
     {
         var usuario = _context.Usuarios.FirstOrDefault(p => p.IdUsuario == id);
         if(usuario is null)
@@ -54,7 +54,7 @@ public class UsuarioController : ControllerBase
             new {id = usuario.IdUsuario}, usuario);
     }
     [HttpPut("{id}")]
-    public ActionResult Put(string id, Usuario usuario)
+    public ActionResult Put(Guid id, Usuario usuario)
     {
         if (id!= usuario.IdUsuario)
         {
@@ -66,7 +66,7 @@ public class UsuarioController : ControllerBase
         return Ok(usuario);
     }
     [HttpDelete("{id}")]
-    public ActionResult Delete(string id)
+    public ActionResult Delete(Guid id)
     {
         var usuario = _context.Usuarios.FirstOrDefault(p => p.IdUsuario == id);
 

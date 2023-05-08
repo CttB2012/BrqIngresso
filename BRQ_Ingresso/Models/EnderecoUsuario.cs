@@ -5,7 +5,7 @@ namespace BRQ_Ingresso.Models;
 public class EnderecoUsuario
 {
     [Key]
-    public string IdEndereco { get; set; }
+    public Guid IdEndereco { get; set; }
     [Required]
     [StringLength(100)]
     public string? Logradouro { get; set; }
@@ -26,9 +26,6 @@ public class EnderecoUsuario
     public string? Pais { get; set; }
     [Required]
     [StringLength(8)]
-    public string? Cep { get; set; }
-
-    
-    public string? IdUsuario { get; set; }    
+    public string? Cep { get; set; }       
     
 }
