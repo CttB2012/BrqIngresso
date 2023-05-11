@@ -1,31 +1,41 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace BRQ_Ingresso.Models;
 
 public class EnderecoUsuario
 {
     [Key]
-    public Guid IdEndereco { get; set; }
+    [JsonIgnore]
+    public Guid EnderecoUsuarioId { get; set; }
+
     [Required]
-    [StringLength(100)]
-    public string? Logradouro { get; set; }
+   // [MaxLength(100)]
+    public string Logradouro { get; set; }
+
     [Required]
-    [StringLength(10)]
-    public string? Numero { get; set; }
+    //[MaxLength(10)]
+    public string Numero { get; set; }
+
     [Required]
-    [StringLength(20)]
-    public string? Bairro { get; set; }
+    //[MaxLength(20)]
+    public string Bairro { get; set; }
+
     [Required]
-    [StringLength(20)]
-    public string? Cidade { get; set; }
+    //[MaxLength(20)]
+    public string Cidade { get; set; }
+
     [Required]
-    [StringLength(2)]
-    public string? Estado { get; set; }
+    //[MaxLength(2)]
+    public string Estado { get; set; }
+
     [Required]
-    [StringLength(2)]
-    public string? Pais { get; set; }
+    //[MaxLength(2)]
+    public string Pais { get; set; }
+
     [Required]
-    [StringLength(8)]
-    public string? Cep { get; set; }       
+    //[MaxLength(8)]
+    public string Cep { get; set; }
+
     
 }

@@ -28,10 +28,10 @@ public class UsuarioController : ControllerBase
         return usuarios;
     }
 
-    [HttpGet("{id}", Name ="NovoUsuario")]
+    [HttpGet("{id}", Name = "NovoUsuario")]
     public ActionResult<Usuario> Get(Guid id) 
     {
-        var usuario = _context.Usuarios.FirstOrDefault(p => p.IdUsuario == id);
+        var usuario = _context.Usuarios.FirstOrDefault(p => p.UsuarioId == id);
         if(usuario is null)
         {
             return NotFound();
@@ -51,12 +51,12 @@ public class UsuarioController : ControllerBase
         _context.SaveChanges();
 
         return new CreatedAtRouteResult("NovoUsuario", 
-            new {id = usuario.IdUsuario}, usuario);
+            new {id = usuario.UsuarioId}, usuario);
     }
     [HttpPut("{id}")]
     public ActionResult Put(Guid id, Usuario usuario)
     {
-        if (id!= usuario.IdUsuario)
+        if (id!= usuario.UsuarioId)
         {
             return BadRequest();
         }
@@ -68,7 +68,7 @@ public class UsuarioController : ControllerBase
     [HttpDelete("{id}")]
     public ActionResult Delete(Guid id)
     {
-        var usuario = _context.Usuarios.FirstOrDefault(p => p.IdUsuario == id);
+        var usuario = _context.Usuarios.FirstOrDefault(p => p.UsuarioId == id);
 
         if(usuario is null)
         {

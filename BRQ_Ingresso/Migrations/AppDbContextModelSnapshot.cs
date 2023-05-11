@@ -21,68 +21,58 @@ namespace BRQ_Ingresso.Migrations
 
             modelBuilder.Entity("BRQ_Ingresso.Models.EnderecoUsuario", b =>
                 {
-                    b.Property<string>("IdEndereco")
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("EnderecoUsuarioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Bairro")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Cep")
                         .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("varchar(8)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Cidade")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Estado")
                         .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("varchar(2)");
-
-                    b.Property<string>("IdUsuario")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Logradouro")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Numero")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Pais")
                         .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("varchar(2)");
+                        .HasColumnType("longtext");
 
-                    b.HasKey("IdEndereco");
+                    b.HasKey("EnderecoUsuarioId");
 
                     b.ToTable("EnderecoUsuarios");
                 });
 
             modelBuilder.Entity("BRQ_Ingresso.Models.Usuario", b =>
                 {
-                    b.Property<string>("IdUsuario")
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("UsuarioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Apelido")
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("CPF")
                         .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("varchar(11)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("Celular")
-                        .HasMaxLength(13)
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataAtualizacao")
@@ -93,34 +83,46 @@ namespace BRQ_Ingresso.Migrations
 
                     b.Property<string>("DataNascimento")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("varchar(12)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(255)");
 
-                    b.Property<string>("IdEndereco")
-                        .HasColumnType("longtext");
+                    b.Property<Guid>("EnderecoUsuarioId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("NomeCompleto")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("Sexo")
-                        .HasMaxLength(2)
-                        .HasColumnType("int");
+                    b.Property<string>("Sexo")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.HasKey("IdUsuario");
+                    b.HasKey("UsuarioId");
+
+                    b.HasIndex("EnderecoUsuarioId");
+
+                    b.HasIndex("CPF", "Email")
+                        .IsUnique();
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("BRQ_Ingresso.Models.Usuario", b =>
+                {
+                    b.HasOne("BRQ_Ingresso.Models.EnderecoUsuario", "EnderecoUsuario")
+                        .WithMany()
+                        .HasForeignKey("EnderecoUsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EnderecoUsuario");
                 });
 #pragma warning restore 612, 618
         }

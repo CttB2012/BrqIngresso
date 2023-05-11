@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace BRQ_Ingresso.Models;
 
@@ -7,47 +9,45 @@ namespace BRQ_Ingresso.Models;
 public class Usuario
 {
     [Key]
-    public Guid IdUsuario { get; set; }
+    [JsonIgnore]
+    public Guid UsuarioId { get; set; }
 
     [Required]
-    [StringLength(11)]    
-    public string? CPF { get; set; }
+    //[MaxLength(11)]    
+    public string CPF { get; set; }
 
     [Required]
-    [StringLength(50)]
-    public string? Email { get; set; }
+    //[MaxLength(50)]
+    public string Email { get; set; }
 
     [Required]
-    [StringLength(100)]
-    public string? NomeCompleto { get; set; }
+    //[MaxLength(100)]
+    public string NomeCompleto { get; set; }
 
     [Required]
-    [StringLength(100)]
-    public string? Senha { get; set; }
+    //[MaxLength(100)]
+    public string Senha { get; set; }
 
-    [StringLength(20)]
-    public string? Apelido { get; set; }
-
-    [Required]
-    [StringLength(12)]
-    public string? DataNascimento { get; set; }
+    
+    //[StringLength(20)]
+    public string Apelido { get; set; }
 
     [Required]
-    [StringLength(13)]
+    //[MaxLength(12)]
+    public string DataNascimento { get; set; }
+
+    [Required]
+    //[MaxLength(13)]
     public int Celular { get; set; }
 
     [Required]
-    [StringLength(2)]
+    //[MaxLength(2)]
     public string Sexo { get; set; }
 
     public DateTime DataCadastro { get; set; }
     public DateTime DataAtualizacao { get; set; }
 
-    
-    
-    public Guid IdEndereco { get; set; }
-
-    public EnderecoUsuario EnderecoUsuario { get; set; }
-   
-   
+    [JsonIgnore]
+    public Guid EnderecoUsuarioId { get; set; }
+    public EnderecoUsuario EnderecoUsuario {get; set;}
 }
