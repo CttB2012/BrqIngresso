@@ -45,6 +45,8 @@ public class Usuario
     public string Sexo { get; set; }
 
     public DateTime DataCadastro { get; set; }
+
+    [JsonIgnore]
     public DateTime DataAtualizacao { get; set; }
 
     [JsonIgnore]

@@ -31,11 +31,12 @@ public class UsuarioController : ControllerBase
     [HttpGet("{id}", Name = "NovoUsuario")]
     public ActionResult<Usuario> Get(Guid id) 
     {
-        var usuario = _context.Usuarios.FirstOrDefault(p => p.UsuarioId == id);
+        var usuario = _context.Usuarios.FirstOrDefault(p => p.UsuarioId == id );
         if(usuario is null)
         {
             return NotFound();
         }
+        usuario.EnderecoUsuario = _context.EnderecoUsuarios.FirstOrDefault(p => p.EnderecoUsuarioId == usuario.EnderecoUsuarioId);
         return usuario;
     }
 
